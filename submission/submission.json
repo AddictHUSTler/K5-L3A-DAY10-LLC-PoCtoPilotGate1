@@ -1,12 +1,16 @@
 {
-  "team": "",
-  "members": [],
-  "incident": "",
-  "decision_v1": "",
-  "decision_v2": "",
+  "team": "K5-L3A-DAY10-LLC-PoCtoPilotGate1",
+  "members": [
+    "NguyenTrongPhuongBach-2A202603716",
+    "TranThaiHung-2A202603557",
+    "DoNhatAnh-2A202603701"
+  ],
+  "incident": "S7",
+  "decision_v1": "Thu hẹp",
+  "decision_v2": "Dừng",
   "three_lines": {
-    "environment_assumption": "",
-    "reduce_or_prevent": "",
-    "measure_in_pilot": ""
+    "environment_assumption": "Bốn trường order_id, parcel_id, district, delay_days không đủ để hãng nhận ra người nhận, và hợp đồng với hãng khớp danh sách này.",
+    "reduce_or_prevent": "NGĂN tác hại đã biết (lọc theo danh sách cho phép, không dò chuỗi PII); chỉ GIẢM khả năng với kiểu PII mới chưa nằm trong danh sách.",
+    "measure_in_pilot": "Số lượng và nội dung thật của thông báo gửi hãng, hợp đồng thật với từng hãng, chi phí mỗi ticket ở lượng ticket thật."
   }
 }

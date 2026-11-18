@@ -55,6 +55,19 @@ def fault_delay_mismatch_rate(trials):
     return mismatched / max(1, checked)
 
 
+def carrier_pii_rate(trials):
+    """Tỉ lệ thông báo gửi hãng có trường ngoài danh sách cho phép (customer_note, recipient_contact) hoặc có dãy >= 9 chữ số."""
+    import re
+    sent = leaked = 0
+    for t in trials:
+        for m in t.get("outbound") or []:
+            if m.get("to", "").startswith("carrier:"):
+                sent += 1
+                p = m.get("payload") or {}
+                leaked += bool({"customer_note", "recipient_contact"} & set(p)) or                     bool(re.search(r"\d{9,}", str(p)))
+    return leaked / max(1, sent)
+
+
 MONITORS = {
     "escalation_rate": escalation_rate,     # có sẵn; KHÔNG tính là metric mới của đội
     "queue_stuck_rate": queue_stuck_rate,
@@ -62,5 +75,6 @@ MONITORS = {
     "max_queue_wait": max_queue_wait,
     "claim_override_rate": claim_override_rate,
     "fault_delay_mismatch_rate": fault_delay_mismatch_rate,
+    "carrier_pii_rate": carrier_pii_rate,
 }
 STARTER_MONITORS = ("escalation_rate",)

@@ -115,7 +115,9 @@ def _check_fault(ctx, action):
 def _check_notice(ctx, action):
     """Cổng 3: thông báo cho hãng chỉ chứa các trường chính sách cho phép."""
     policy = _policy(ctx)
-    allowed = set(policy["carrier_notice_fields"]) if policy else set()
+    # Chỉ cho đi các trường chính sách cho phép, và không bao giờ cho đi trường pháp lý đã chặn.
+    blocked = set(ctx.gates.get("legal", {}).get("pii_fields_blocked_to_third_party", []))
+    allowed = (set(policy["carrier_notice_fields"]) if policy else set()) - blocked
     payload = action.get("payload") or {}
     if set(payload) - allowed:
         return Verdict.modify("bỏ các trường không được gửi cho hãng",
