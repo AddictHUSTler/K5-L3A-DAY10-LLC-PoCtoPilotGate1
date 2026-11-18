@@ -13,7 +13,7 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; thêm dòng nếu 
 
 | STT | Họ và tên | MSSV | Vai | Trưởng nhóm |
 | --: | --------- | ---- | --- | :---------: |
-|   1 |           |      |     |             |
+|   1 |Nguyễn Trọng Phương Bách | 2A202603716 | Kỹ sư cổng |Có            |
 |   2 |Trần Thái Hưng| 2A202603557| Kỹ sư cổng |             |
 |   3 |Đỗ Nhật Anh|2A202603701||Sản phẩm và kinh doanh|
 |   4 |           |      |     |             |
