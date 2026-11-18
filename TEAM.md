@@ -16,7 +16,7 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; thêm dòng nếu 
 |   1 | Nguyễn Trọng Phương Bách | 2A202603716 | Kỹ sư cổng             |     Có      |
 |   2 | Trần Thái Hưng           | 2A202603557 | Kỹ sư cổng             |             |
 |   3 | Đỗ Nhật Anh              | 2A202603701 | Sản phẩm và kinh doanh |             |
-|   4 |                          |             |                        |             |
+|   4 | Vũ Đức Anh               | 2A202603714 | Vận hành và pháp lý    |             |
 
 Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, khớp bảng trên.
 
@@ -82,9 +82,11 @@ Một điều học được: an toàn đạt chưa đủ; chi phí vẫn vượ
 
 Một điều còn chưa chắc: chi phí mỗi ticket ở lượng ticket thật, vì số hiện tại bị chi phí cố định chi phối.
 
-## HoVaTen-MSSV
+## VuDucAnh-2A202603714
 
-(Thành viên thứ tư: đổi tiêu đề thành họ tên không dấu và MSSV.)
+- Họ và tên: Vũ Đức Anh
+- MSSV: 2A202603714
+- Email: 26ai.anhvd4@vinuni.edu.vn
 
 ### Phần việc phụ trách
 
@@ -144,6 +146,6 @@ Vai trong bàn: Kỹ sư cổng, phụ trách viết cổng phòng ngừa.
 
 ### Exit ticket
 
-Một điều học được:
+Một điều học được: Cổng code chặn theo danh sách cho phép (whitelist) kết hợp ghim chính sách theo ngày hiệu lực (pinning) và theo dõi qua monitor chặn đứng hoàn toàn rủi ro lộ dữ liệu cá nhân (từ 30 lần về 0) mà không làm suy giảm hiệu năng hay gây lỗi hồi quy (regression).
 
-Một điều còn chưa chắc:
+Một điều còn chưa chắc: Khi hệ thống mở rộng lên hàng nghìn đơn/ngày và tích hợp nhiều đơn vị vận chuyển mới với định dạng payload khác nhau, việc duy trì cấu hình whitelist thủ công có thể phát sinh chi phí bảo trì lớn.
