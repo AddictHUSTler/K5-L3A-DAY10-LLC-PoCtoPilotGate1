@@ -29,7 +29,7 @@ Mọi con số trong quyết định Gate 1 phải trỏ về một dòng ở đ
 
 | # | Mã lần chạy | Bộ ticket · mốc | Đổi MỘT thứ gì so với lần trước | pass_rate (khoảng tin cậy 95%) | pass_k | Hoàn sai (đ) · lỗi hãng oan · lộ dữ liệu | Tỉ lệ chuyển người | Kết luận (một câu) |
 |---|---|---|---|---|---|---|---|---|
-| 1 | | base · base | (baseline, chưa có cổng) | | | | | |
+| 1 | R-base-before-20261118-160650-9b453b | base · base | (baseline, chưa có cổng) | 0,9909 [0,9727; 1,0] | 0,9545 | 20.000đ · 1 · 0 | 0,2273 | Đạt pass_rate/pass_k nhưng còn 1 ca hoàn sai và 1 lỗi hãng oan (T-002@55), chi phí 4.203đ vượt trần 1.500đ |
 | 2 | | base · after | (cổng vòng 1, thử trước khi chốt) | | | | | |
 | 3 | | base · prepared | (cổng vòng 1 đã chốt) | | | | | |
 | 4 | | | | | | | | |
@@ -45,18 +45,18 @@ python3 -m lab10.eval --suite base --stage base --note "baseline"
 python3 -m lab10.gate --run runs/<mã lần chạy>/report.json
 ```
 
-- Mã lần chạy: `__________` (ghi cả vào B0 dòng 1)
-- Ngưỡng đã ký nào `[CHƯA]` đạt: …
-- Khối "kinh doanh và vận hành" ở cuối output: dòng nào đáng lo? …
-- Khối "theo kho và hãng": kho hoặc hãng nào có số xấu nhất? …
+- Mã lần chạy: `R-base-before-20261118-160650-9b453b` (ghi cả vào B0 dòng 1)
+- Ngưỡng đã ký nào `[CHƯA]` đạt: wrongful_refund_vnd (20.000 > 0), wrongful_carrier_faults (1 > 0), cost_per_ticket_vnd (4.203đ > 1.500đ). Đạt: pass_rate, pass_k, pii_leaks, escalation_rate, roi (1,34), queue_stuck.
+- Khối "kinh doanh và vận hành" ở cuối output: dòng nào đáng lo? Chi phí mỗi ticket 4.203đ, gấp ~2,8 lần trần 1.500đ (làm tay 10.000đ); hoàn sai ngày tệ nhất 20.000đ. ROI 1,34 và hàng chờ (0 ca ùn) ổn.
+- Khối "theo kho và hãng": kho hoặc hãng nào có số xấu nhất? Kho HCM (pass_rate 0,96, hoàn sai 20.000đ, 1 lỗi hãng oan) và hãng VNX (0,9714, cùng ca đó). Chi phí/ticket cao nhất: kho `?` 10.359đ, DN 4.586đ.
 
 **Cổng so tiêu chí này có nên tự chặn một bản phát hành không (so với để người duyệt)?**
 
 | Lý lẽ ủng hộ tự chặn | Lý lẽ phản đối |
 |---|---|
-| | |
+| Hoàn sai và lỗi hãng oan đặt trần 0 nên chỉ cần 1 ca là trượt; tự chặn ở cổng là cách duy nhất ngăn tiền ra trước khi có người thấy. Số cần sửa ít (1 ticket hỏng). | Chặn quá tay sẽ đẩy ca đúng sang người duyệt, làm tăng chuyển người và chi phí (đã 4.203đ so với trần 1.500đ). Hàng chờ chỉ 1 người trực, 6 ca/giờ. |
 
-Khuyến nghị (khoanh một): **tự chặn · người duyệt · kết hợp**. Vì: …
+Khuyến nghị (khoanh một): **tự chặn · người duyệt · kết hợp** → **kết hợp**. Vì: tự chặn các hành động ghi tiền/lỗi hãng khi dữ liệu DB không khớp ticket (T-002@55), còn ca mơ hồ chuyển người duyệt; hàng chờ hiện 0 ca ùn nên còn dư sức nhận thêm. Chi phí vượt trần là vấn đề riêng, cần vai 3 xem lại trần hoặc phạm vi.
 
 ---
 

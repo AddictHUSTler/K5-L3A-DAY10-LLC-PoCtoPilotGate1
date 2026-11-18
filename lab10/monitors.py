@@ -19,7 +19,27 @@ def escalation_rate(trials):
     return sum(t["status"] == "escalated" for t in trials) / max(1, len(trials))
 
 
+def queue_stuck_rate(trials):
+    """Tỉ lệ ticket bị ùn trong hàng chờ người duyệt."""
+    return sum(bool(t.get("queue_stuck")) for t in trials) / max(1, len(trials))
+
+
+def peak_review_load(trials):
+    """Số ca cần người duyệt trong khung 60 phút đông nhất của ca (arrive_min 0..480)."""
+    mins = [t["arrive_min"] for t in trials
+            if t.get("review_kind") and t.get("arrive_min") is not None]
+    return max((sum(1 for m in mins if s <= m < s + 60) for s in range(0, 421, 10)), default=0)
+
+
+def max_queue_wait(trials):
+    """Thời gian chờ lâu nhất (phút) của một ca chờ người duyệt."""
+    return max((t["queue_wait_min"] for t in trials if t.get("queue_wait_min") is not None), default=0)
+
+
 MONITORS = {
     "escalation_rate": escalation_rate,     # có sẵn; KHÔNG tính là metric mới của đội
+    "queue_stuck_rate": queue_stuck_rate,
+    "peak_review_load": peak_review_load,
+    "max_queue_wait": max_queue_wait,
 }
 STARTER_MONITORS = ("escalation_rate",)
