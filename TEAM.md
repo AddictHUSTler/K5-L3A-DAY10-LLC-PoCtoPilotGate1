@@ -15,7 +15,7 @@ Họ tên đầy đủ và MSSV của **mọi** thành viên; thêm dòng nếu 
 | --: | --------- | ---- | --- | :---------: |
 |   1 |           |      |     |             |
 |   2 |Trần Thái Hưng| 2A202603557| Kỹ sư cổng |             |
-|   3 |           |      |     |             |
+|   3 |Đỗ Nhật Anh|2A202603701||Sản phẩm và kinh doanh|
 |   4 |           |      |     |             |
 
 Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, khớp bảng trên.
