@@ -48,23 +48,27 @@ Một điều học được, một điều còn chưa chắc.
 
 Vai trong bàn: Kỹ sư cổng, phụ trách viết cổng phòng ngừa.
 
-- Câu trong đề: 2.2, 2.6, 3.1, 3.5.
-- Mục trong phiếu: Phiếu B mục B2, B7.1; Phiếu C mục C2, C7.
-- File: `lab10/guards.py`.
-- Chốt cổng vòng 1 bằng `python3 -m lab10.checkpoint`.
+- Câu trong đề: 2.2, 2.6, 2.7, 2.8, 3.1, 3.5.
+- Mục trong phiếu: Phiếu B mục B0 (dòng base và after), B2, B7.1, B7.2, B7.3; Phiếu C mục C2, C7.
+- File: `lab10/guards.py`, `lab10/monitors.py` (hai chỉ số `claim_override_rate`, `fault_delay_mismatch_rate`).
+- Chạy đo chính thức trên máy của mình và chốt cổng vòng 1 bằng `python3 -m lab10.checkpoint`.
 
 ### Đóng góp cụ thể
 
 - Dò `T-002@55` và điền bảng soát lỗi ở Phiếu B mục B2, xác định hai lỗi chìm: hoàn sai 20.000đ và ghi lỗi oan cho hãng VNX.
 - Soạn HAZOP vòng 1 trên tool `issue_refund` ở Phiếu B mục B4, gồm năm guideword và hai dòng ngoài kỹ thuật.
 - Soạn đề xuất pre-mortem bốn lăng kính ở Phiếu B mục B6 để cả bàn thống nhất, gắn với ba cổng: Đúng số tiền, Đúng phê duyệt, Bảo vệ bên thứ ba.
-- Dùng AI (Claude Code) để đọc code, soạn nháp B2, B4, B6 và thử nghiệm thiết kế cổng trên bản tạm. Tôi đọc lại và chịu trách nhiệm về nội dung.
+- Viết ba cổng phòng ngừa trong `lab10/guards.py`: Đúng số tiền, Đúng phê duyệt, Bảo vệ bên thứ ba, kèm ghim chính sách theo ngày hiệu lực. Trên bộ nền, `pass_rate` tăng từ 0,9909 lên 1,0, tiền hoàn sai và lỗi ghi oan về 0, không có ca mới hỏng.
+- Thêm hai chỉ số theo dõi trong `lab10/monitors.py` để phát hiện trợ lý lấy số ngày trong ticket đè lên tracking và lệnh ghi lỗi hãng lệch số ngày với tracking.
+- Đo lại mốc base, đo mốc after và ghi vào Phiếu B mục B0; điền B7.1, B7.2, B7.3 với hai ticket hiểm.
+- Dùng AI (Claude Code) để đọc code, soạn nháp B2, B4, B6, B7.1, B7.2, B7.3, hỗ trợ viết và thử nghiệm cổng, monitor. Tôi đọc lại và chịu trách nhiệm về nội dung.
 
 ### Bằng chứng
 
 - Trace: `python3 -m lab10.trace --suite base --ticket T-002 --seed 55`.
-- Phiếu: `templates/form-b-evaluation-gates.md`, mục B2, B4, B6.
-- Mã commit:
+- Phiếu: `templates/form-b-evaluation-gates.md`, mục B0, B2, B4, B6, B7.1, B7.2, B7.3.
+- Mã lần chạy: base `R-base-before-20261118-181246-9b453b`, after `R-base-after-20261118-182903-f36ccc`.
+- Mã commit: `0389a67` (B2, B4, B6).
 
 ### Exit ticket
 

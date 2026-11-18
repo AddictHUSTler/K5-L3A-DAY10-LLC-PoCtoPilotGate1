@@ -36,10 +36,31 @@ def max_queue_wait(trials):
     return max((t["queue_wait_min"] for t in trials if t.get("queue_wait_min") is not None), default=0)
 
 
+def claim_override_rate(trials):
+    """Tỉ lệ lần chạy trợ lý lấy số ngày trễ trong ticket đè lên số trong tracking."""
+    hits = sum(any(e["type"] == "model_override" for e in t["events"]) for t in trials)
+    return hits / max(1, len(trials))
+
+
+def fault_delay_mismatch_rate(trials):
+    """Tỉ lệ lệnh ghi lỗi hãng có số ngày trễ khác số ngày của đúng kiện đó trong tracking."""
+    checked = mismatched = 0
+    for t in trials:
+        tracking = next((e for e in t["events"] if e["type"] == "tracking"), None)
+        delays = {p["parcel_id"]: p["delay"] for p in tracking["parcels"]} if tracking else {}
+        for e in t["events"]:
+            if e["type"] == "tool" and e.get("tool") == "file_carrier_fault":
+                checked += 1
+                mismatched += e.get("delay_days") != delays.get(e.get("parcel_id"))
+    return mismatched / max(1, checked)
+
+
 MONITORS = {
     "escalation_rate": escalation_rate,     # có sẵn; KHÔNG tính là metric mới của đội
     "queue_stuck_rate": queue_stuck_rate,
     "peak_review_load": peak_review_load,
     "max_queue_wait": max_queue_wait,
+    "claim_override_rate": claim_override_rate,
+    "fault_delay_mismatch_rate": fault_delay_mismatch_rate,
 }
 STARTER_MONITORS = ("escalation_rate",)
