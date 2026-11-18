@@ -10,10 +10,10 @@ Thẻ S7: Pháp chế báo thông báo lỗi gửi hãng vận chuyển lộ tê
 
 | # | Mã lần chạy | Bộ · mốc | Đổi MỘT thứ gì | pass_rate (CI 95%) | pass_k | Hoàn sai · lỗi oan · lộ dữ liệu | Chuyển người | Kết luận |
 |---|---|---|---|---|---|---|---|---|
-| 1 | R-S7-before-20261118-203301-e9beef | S7 · base | chưa có cổng | 0,25 [0; 0,625] | 0,25 | 0đ · 0 · 30 | 0 | Lộ 30 lần ở 3 kho, 3 hãng |
-| 2 | R-S7-prepared-20261118-203301-e9beef | S7 · prepared | cổng vòng 1, chưa sửa thêm | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1429 | Cổng vòng 1 đã chặn hết lộ |
-| 3 | R-S7-after-20261118-203300-e9beef | S7 · after | chặn cứng `customer_note`, `recipient_contact` theo `legal` trong config + monitor `carrier_pii_rate` | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1429 | Số không đổi; thêm lớp chặn thứ hai và chỉ số phát hiện |
-| 4 | R-base-after-20261118-203301-e9beef | base · after | (kiểm regression) | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1765 | Không ca nào hỏng thêm |
+| 1 | R-S7-before-20261118-204626-e9beef | S7 · base | chưa có cổng | 0,25 [0; 0,625] | 0,25 | 0đ · 0 · 30 | 0 | Lộ 30 lần ở 3 kho, 3 hãng |
+| 2 | R-S7-prepared-20261118-204626-e9beef | S7 · prepared | cổng vòng 1, chưa sửa thêm | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1429 | Cổng vòng 1 đã chặn hết lộ |
+| 3 | R-S7-after-20261118-204626-e9beef | S7 · after | chặn cứng `customer_note`, `recipient_contact` theo `legal` trong config + monitor `carrier_pii_rate` | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1429 | Số không đổi; thêm lớp chặn thứ hai và chỉ số phát hiện |
+| 4 | R-base-after-20261118-204626-e9beef | base · after | (kiểm regression) | 1,0 [1; 1] | 1,0 | 0đ · 0 · 0 | 0,1765 | Không ca nào hỏng thêm |
 
 Đã thử `review_sampling_pct` 10 → 5 (ROI 0,78, không đổi) và → 3 (ROI 0,98). Không giữ: giảm kiểm mẫu chỉ để lấy số ROI là bỏ lớp kiểm của người. Giữ 10%.
 
@@ -21,7 +21,7 @@ Thẻ S7: Pháp chế báo thông báo lỗi gửi hãng vận chuyển lộ tê
 
 ## C1 · Câu 3.0 · Mốc prepared
 
-- Grade: `R-S7-grade-20261118-203301-e9beef` · base `R-S7-before-20261118-203301-e9beef` · prepared `R-S7-prepared-20261118-203301-e9beef`
+- Grade: `R-S7-grade-20261118-204626-e9beef` · base `R-S7-before-20261118-204626-e9beef` · prepared `R-S7-prepared-20261118-204626-e9beef`
 - Cổng vòng 1 đỡ được: lộ dữ liệu 30 → 0, pass_rate 0,25 → 1,0. Lý do: `_check_notice` chỉ cho đi các trường trong `carrier_notice_fields`.
 - Còn vượt trần: ROI 0,78 < 1,0; chi phí 5.611đ mỗi ticket so với trần 1.500đ.
 - Lăng kính: pháp lý và kỹ thuật. Bàn đã ghi "lộ dữ liệu cá nhân cho bên thứ ba" ở pre-mortem vòng 1, nên cổng có từ trước; thẻ này kiểm lại cổng chứ không phát hiện lỗ hổng mới.
@@ -99,7 +99,7 @@ Có thể sai: quận/huyện ít nhà (quà gửi vùng thưa dân) kết hợp
 
 <a id="c6"></a>
 
-## C6 · Câu 3.4 · Fault tree TRƯỚC khi sửa (mã lần chạy: `R-S7-before-20261118-203301-e9beef`)
+## C6 · Câu 3.4 · Fault tree TRƯỚC khi sửa (mã lần chạy: `R-S7-before-20261118-204626-e9beef`)
 
 ```
 [ĐỈNH] Hãng biết tên, địa chỉ, SĐT người nhận (cho ai: người nhận; đo: pii_leaks = 30)
@@ -124,7 +124,7 @@ Có thể sai: quận/huyện ít nhà (quà gửi vùng thưa dân) kết hợp
 
 | Nhánh | Nguyên nhân | Chỗ sửa | Tầng | Giảm hay ngăn | Mã lần chạy |
 |---|---|---|---|---|---|
-| [1] | Chữ khách gõ chép vào payload | `guards.py` `_check_notice` (đã có từ vòng 1) | chặn | Ngăn: lọc theo danh sách cho phép, không dò chuỗi | R-S7-after-20261118-203300-e9beef |
+| [1] | Chữ khách gõ chép vào payload | `guards.py` `_check_notice` (đã có từ vòng 1) | chặn | Ngăn: lọc theo danh sách cho phép, không dò chuỗi | R-S7-after-20261118-204626-e9beef |
 | [2] | Liên hệ người nhận gắn vào payload | Như trên | chặn | Ngăn, như trên | như trên |
 | [3] | Danh sách cho phép đổi | `_check_notice` trừ thêm `legal.pii_fields_blocked_to_third_party`; metric `carrier_pii_rate` | chặn + phát hiện | Ngăn với hai trường đã khai; chỉ giảm với trường PII chưa khai | như trên |
 
@@ -145,7 +145,7 @@ Có thể sai: quận/huyện ít nhà (quà gửi vùng thưa dân) kết hợp
 
 <a id="c9"></a>
 
-## C9 · Câu 3.7 · Fault tree SAU khi sửa (mã lần chạy: `R-S7-after-20261118-203301-e9beef`)
+## C9 · Câu 3.7 · Fault tree SAU khi sửa (mã lần chạy: `R-S7-after-20261118-204626-e9beef`)
 
 ```
 [ĐỈNH] Hãng biết thông tin người nhận (pii_leaks = 0)
@@ -176,7 +176,7 @@ Có thể sai: quận/huyện ít nhà (quà gửi vùng thưa dân) kết hợp
 
 | # nhóm | Trạng thái | Bằng chứng | PIC |
 |---|---|---|---|
-| 9 Quyết định | Xong | C12; `R-S7-grade-20261118-203301-e9beef` | Lê Thanh Tùng |
+| 9 Quyết định | Xong | C12; `R-S7-grade-20261118-204626-e9beef` | Lê Thanh Tùng |
 
 ### Runbook 4
 
@@ -203,12 +203,12 @@ Có thể sai: quận/huyện ít nhà (quà gửi vùng thưa dân) kết hợp
 | | **v2** |
 |---|---|
 | Quyết định | **Dừng** (v1: Thu hẹp) |
-| Bằng chứng 1 | `R-S7-after-20261118-203301-e9beef`: ba chỉ số an toàn đạt, `pii_leaks` 0, pass_rate 1,0. |
+| Bằng chứng 1 | `R-S7-after-20261118-204626-e9beef`: ba chỉ số an toàn đạt, `pii_leaks` 0, pass_rate 1,0. |
 | Bằng chứng 2 | Chi phí 5.611đ mỗi ticket so với trần 1.500đ; ROI 0,78 < 1,0 (hai ngưỡng đã ký chưa đạt). |
 | Bằng chứng 3 | Đã thu hẹp (cắt kho DN) ở v1 mà chi phí vẫn vượt. Hạ kiểm mẫu xuống 3% cho ROI 0,98, vẫn dưới 1,0. |
 | Khớp `decision_rule` | Dòng **Dừng**: "chi phí mỗi ticket vẫn vượt 1.500đ sau khi đã thu hẹp phạm vi". Chính v1 đã ghi trước rằng nếu v2 vẫn vượt thì chọn Dừng. |
 | Đổi hay giữ so với v1 | Đổi: chi phí 5.611đ (thẻ), 4.400đ (bộ nền) vẫn gấp khoảng 3 lần trần. |
-| Report tự kiểm tra | `R-S7-grade-20261118-203301-e9beef`: ❌ `visible` (ROI 0,78); ❌ `integrity` chỉ vì máy này chỉ có `incidents/S7`, thiếu thư mục S1–S6, S8 mà bản khoá yêu cầu; ✅ `criteria`, `regression`, `monitor`. |
+| Report tự kiểm tra | `R-S7-grade-20261118-204626-e9beef`: ❌ `visible` (ROI 0,78, trần còn vượt); ✅ `integrity`, `criteria`, `regression`, `monitor`. |
 | Cổng vòng 1 đỡ được gì, bỏ sót gì | Đỡ toàn bộ lộ dữ liệu (30 → 0). Không bỏ sót trên gói này; còn hở với trường PII chưa khai trong `legal`. |
 | Report cho phép cân nhắc Tiếp tục? | Không đủ căn cứ. Quyết định Dừng khớp. |
 | Bài học nếu Dừng | An toàn đã đạt; kinh tế chưa. Muốn mở lại phải giảm chi phí mỗi ticket trước, không giảm kiểm tra an toàn. |

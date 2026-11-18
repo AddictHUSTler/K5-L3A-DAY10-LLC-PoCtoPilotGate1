@@ -2,16 +2,16 @@
 
 *Đây là kết quả TỰ KIỂM TRA của bàn, không phải điểm. Bài được một team chấm tự động chấm lại sau buổi học.*
 
-- Mã lần chạy: `R-S7-grade-20261118-203301-e9beef` · bàn: `K5-L3A-DAY10-LLC-PoCtoPilotGate1` · grader `lab10-1.0` · 0.396s
-- Ba mốc: base `R-S7-before-20261118-203301-e9beef` · prepared `R-S7-prepared-20261118-203301-e9beef` · after `R-S7-after-20261118-203301-e9beef` (report + trace trong runs/)
+- Mã lần chạy: `R-S7-grade-20261118-204626-e9beef` · bàn: `K5-L3A-DAY10-LLC-PoCtoPilotGate1` · grader `lab10-1.0` · 0.368s
+- Ba mốc: base `R-S7-before-20261118-204626-e9beef` · prepared `R-S7-prepared-20261118-204626-e9beef` · after `R-S7-after-20261118-204626-e9beef` (report + trace trong runs/)
 - Mốc prepared (cổng vòng 1): đã chốt `ec9e40b5`, còn nguyên
 - Hash code đội (guards + monitors + switches + cổng vận hành): `e9beef1f3709`
 - Hash Bản tiêu chí chấp nhận: `f4853f3d36bd` · đã ký: `f4853f3d36bd` · KHÔNG ĐỔI
-- Thẻ đang kiểm: `S7` · dòng "Thẻ đã bốc" bàn ghi trong phiếu: (trống) · chưa ghi (ghi đúng số đã bốc vào dòng `Thẻ đã bốc:` ở đầu `templates/form-c-incident.md`)
+- Thẻ đang kiểm: `S7` · dòng "Thẻ đã bốc" bàn ghi trong phiếu: S7 · khớp
 
 | Kiểm | Kết quả | Chi tiết |
 |---|---|---|
-| 1 integrity | ❌ | file khoá bị đổi: ['incidents/S1/card.json', 'incidents/S1/card.md', 'incidents/S1/tickets.jsonl', 'incidents/S1/world_patch.json', 'incidents/S2/card.json', 'incidents/S2/card.md', 'incidents/S2/tickets.jsonl', 'incidents/S2/world_patch.json', 'incidents/S3/card.json', 'incidents/S3/card.md', 'incidents/S3/tickets.jsonl', 'incidents/S3/world_patch.json', 'incidents/S4/card.json', 'incidents/S4/card.md', 'incidents/S4/tickets.jsonl', 'incidents/S4/world_patch.json', 'incidents/S5/card.json', 'incidents/S5/card.md', 'incidents/S5/tickets.jsonl', 'incidents/S5/world_patch.json', 'incidents/S6/card.json', 'incidents/S6/card.md', 'incidents/S6/tickets.jsonl', 'incidents/S6/world_patch.json', 'incidents/S8/card.json', 'incidents/S8/card.md', 'incidents/S8/tickets.jsonl', 'incidents/S8/world_patch.json'] |
+| 1 integrity | ✅ | file khoá bị đổi: không |
 | 2 criteria | ✅ | đã ký, còn nguyên |
 | 3 visible | ❌ | base có vấn đề: True; after sạch: False; ticket còn hỏng: không; trần còn vượt: ['ROI 0.78 < ngưỡng bàn đặt 1.0'] |
 | 4 hidden | — | máy này không có bài kiểm tra ẩn (team chấm sẽ chạy sau buổi học) |

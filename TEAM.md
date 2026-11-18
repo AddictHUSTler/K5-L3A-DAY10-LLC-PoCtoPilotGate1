@@ -2,10 +2,10 @@
 
 ## Thông tin nhóm
 
-- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng):
-- Lớp: `L3A` / `L3B`
-- Repo của bàn: `K5-<L3A|L3B>-DAY10-<TenNhom>-PoCtoPilotGate1`
-- Thẻ sự cố đã bốc (S1–S8):
+- Tên nhóm (`TenNhom`, không dấu, không khoảng trắng): LLC
+- Lớp: `L3A`
+- Repo của bàn: `K5-L3A-DAY10-LLC-PoCtoPilotGate1`
+- Thẻ sự cố đã bốc (S1–S8): S7
 
 ## Thành viên
 
@@ -24,23 +24,92 @@ Ghi `members` trong `submission/submission.json` theo dạng `"HoVaTen-MSSV"`, k
 
 Mỗi thành viên tự viết một mục bên dưới (chép mẫu, đổi tiêu đề thành họ tên không dấu và MSSV, ví dụ `## NguyenVanAn-20241234`).
 
-## HoVaTen-MSSV
+## NguyenTrongPhuongBach-2A202603716
 
 ### Phần việc phụ trách
 
-Vai trong bàn; câu nào của đề, mục nào của phiếu A/B/C, file nào (`lab10/guards.py`, `config/operating_gates.json`, …).
+Vai trong bàn: Kỹ sư cổng, trưởng nhóm.
+
+- Câu trong đề: 3.0, 3.1 (HAZOP), 3.4, 3.6, 3.7 (fault tree sau sửa).
+- Mục trong phiếu: Phiếu C mục C0, C1, C4, C6, C8, C9.
+- File: `lab10/monitors.py` (chỉ số `carrier_pii_rate`), `incidents/`, `submission/submission.json`, `TEAM.md`.
 
 ### Đóng góp cụ thể
 
-...
+- Bốc thẻ S7, ghi `Thẻ đã bốc:` và chạy lệnh 6 trước khi sửa để lấy mốc base, prepared.
+- Điền C0 (nhật ký lần chạy), C1 (cổng vòng 1 đỡ được gì), C4 (HAZOP trên `notify_carrier`).
+- Vẽ fault tree trước sửa (C6) và sau sửa (C9).
+- Thêm chỉ số `carrier_pii_rate` trong `lab10/monitors.py` và điền C8.
+- Gom bài: điền `submission/submission.json`, chạy lệnh 7 tới khi `ĐỦ THÀNH PHẦN`.
 
 ### Bằng chứng
 
-Mã commit, mã lần chạy (`runs/<mã>`), dòng trong phiếu.
+- Mã lần chạy: grade `R-S7-grade-20261118-204626-e9beef`; base `R-S7-before-20261118-204626-e9beef`; prepared `R-S7-prepared-20261118-204626-e9beef`; after `R-S7-after-20261118-204626-e9beef`.
+- Phiếu: `templates/form-c-incident.md`, mục C0, C1, C4, C6, C8, C9.
+- Mã commit: `fca35d1` (thẻ S7, CP4).
 
 ### Exit ticket
 
-Một điều học được, một điều còn chưa chắc.
+Một điều học được: cổng lọc theo danh sách cho phép chặn hết lộ dữ liệu (30 → 0) mà không cần dò chuỗi PII.
+
+Một điều còn chưa chắc: bốn trường được phép (nhất là `district`) có đủ để hãng nhận ra người nhận ở vùng thưa dân hay không.
+
+## DoNhatAnh-2A202603701
+
+### Phần việc phụ trách
+
+Vai trong bàn: Sản phẩm và kinh doanh.
+
+- Câu trong đề: 3.2, 3.3, quyết định v2.
+- Mục trong phiếu: Phiếu C mục C5, C12.
+- File: `config/acceptance_criteria.json` (đối chiếu `decision_rule`).
+
+### Đóng góp cụ thể
+
+- Viết C5 (specification, giả định môi trường).
+- Soạn quyết định v2 ở C12: **Dừng**, đối chiếu với dòng Dừng của `decision_rule` đã ký: chi phí 5.611đ mỗi ticket so với trần 1.500đ, ROI 0,78 < 1,0 sau khi đã thu hẹp ở v1.
+- Thử hạ `review_sampling_pct` 10 → 5 → 3 để xem ROI; không giữ vì đó là bỏ lớp kiểm của người.
+- Viết ba dòng bắt buộc ở cuối C12.
+
+### Bằng chứng
+
+- Mã lần chạy: `R-S7-after-20261118-204626-e9beef`, `R-S7-grade-20261118-204626-e9beef`.
+- Phiếu: `templates/form-c-incident.md`, mục C5, C12.
+
+### Exit ticket
+
+Một điều học được: an toàn đạt chưa đủ; chi phí vẫn vượt trần thì quyết định đúng là Dừng, không hạ kiểm mẫu để lấy số ROI.
+
+Một điều còn chưa chắc: chi phí mỗi ticket ở lượng ticket thật, vì số hiện tại bị chi phí cố định chi phối.
+
+## HoVaTen-MSSV
+
+(Thành viên thứ tư: đổi tiêu đề thành họ tên không dấu và MSSV.)
+
+### Phần việc phụ trách
+
+Vai trong bàn: Vận hành và pháp lý.
+
+- Câu trong đề: 3.3 (hiệu chỉnh lòng tin), 3.7 (risk register, checklist, runbook).
+- Mục trong phiếu: Phiếu C mục C3, C10, C11.
+- File: `config/operating_gates.json` (đối chiếu `legal`, `operations`).
+
+### Đóng góp cụ thể
+
+- Viết C3: người đặt hàng và người nhận hàng tin gì, biết gì về dữ liệu gửi hãng vận chuyển.
+- Điền risk register C10 (thêm trường vào thông báo hãng mà không qua rà soát pháp lý).
+- Cập nhật checklist và viết runbook 4, 5 ở C11: xin lỗi người nhận, nhờ hãng xoá dữ liệu, tắt `notify_carrier` khi `carrier_pii_rate` > 0.
+
+### Bằng chứng
+
+- Phiếu: `templates/form-c-incident.md`, mục C3, C10, C11.
+- Mã lần chạy: `R-S7-grade-20261118-204626-e9beef`.
+
+### Exit ticket
+
+Một điều học được: dữ liệu đã gửi hãng không thu hồi được, nên phần việc của pháp lý là chặn trước và có sẵn runbook xin lỗi, xoá dữ liệu.
+
+Một điều còn chưa chắc: hợp đồng thật với từng hãng có khớp danh sách bốn trường được phép hay không.
 
 ## TranThaiHung-2A202603557
 
@@ -63,8 +132,7 @@ Vai trong bàn: Kỹ sư cổng, phụ trách viết cổng phòng ngừa.
 - Đo lại mốc base, đo mốc after và ghi vào Phiếu B mục B0; điền B7.1, B7.2, B7.3 với hai ticket hiểm.
 - Điền cổng kinh doanh, vận hành, pháp lý trong `config/operating_gates.json`, checklist B5, runbook B7.5 và giờ cao điểm B7.6, đo lại mốc after với config đầy đủ.
 - Điền bản đồ dữ liệu B3, so sánh các phương án phạm vi pilot, đề xuất cắt kho DN và soạn quyết định v1 ở B8.
-- Chốt cổng vòng 1 (hash `ec9e40b5`), đo mốc prepared và cập nhật B0, B8.
-- Dùng AI (Claude Code) để đọc code, soạn nháp B2, B3, B4, B5, B6, B7.1 đến B7.6, B8, hỗ trợ viết và thử nghiệm cổng, monitor, config. Tôi đọc lại và chịu trách nhiệm về nội dung.
+- Chốt cổng vòng 1 (hash `ec9e40b5`), đo mốc prepared và cập nhật B0, B8.- Dùng AI (Claude Code) để đọc code, soạn nháp B2, B3, B4, B5, B6, B7.1 đến B7.6, B8, hỗ trợ viết và thử nghiệm cổng, monitor, config. Tôi đọc lại và chịu trách nhiệm về nội dung.
 
 ### Bằng chứng
 
