@@ -31,7 +31,7 @@ Mọi con số trong quyết định Gate 1 phải trỏ về một dòng ở đ
 |---|---|---|---|---|---|---|---|---|
 | 1 | R-base-before-20261118-181246-9b453b | base · base | (baseline, chưa có cổng) | 0,9909 [0,9727; 1,0] | 0,9545 | 20.000đ · 1 · 0 | 0,2273 | Đạt pass_rate/pass_k nhưng còn 1 ca hoàn sai và 1 lỗi hãng oan (T-002@55), chi phí 4.203đ vượt trần 1.500đ |
 | 2 | R-base-after-20261118-182903-f36ccc | base · after | Thêm 3 cổng trong `lab10/guards.py` và 2 monitor, config chưa đổi | 1,0 [1,0; 1,0] | 1,0 | 0đ · 0 · 0 | 0,2273 | Ba chỉ số an toàn đều đạt, không có ca mới hỏng; chi phí 4.202đ vẫn vượt trần 1.500đ |
-| 3 | | base · prepared | (cổng vòng 1 đã chốt) | | | | | |
+| 3 | R-base-prepared-20261118-191313-5a27af | base · prepared | Chốt cổng vòng 1 (hash `ec9e40b5`), không đổi code và config so với dòng 6 | 1,0 [1,0; 1,0] | 1,0 | 0đ · 0 · 0 | 0,1765 | Mốc prepared khớp dòng 6: ba chỉ số an toàn đạt, không có ca mới hỏng; chi phí 4.400đ vẫn vượt trần 1.500đ đã ký |
 | 4 | R-base-after-20261118-184811-5643e5 | base · after | Thêm mục `operations` và `legal` trong config | 1,0 [1,0; 1,0] | 1,0 | 0đ · 0 · 0 | 0,2273 | Ghi chú giải thích và kiểm mẫu 10% làm chi phí tăng từ 4.202đ lên 4.456đ, ROI còn 1,24 |
 | 5 | R-base-after-20261118-184907-38d77a | base · after | Thêm mục `business` trong config | 1,0 [1,0; 1,0] | 1,0 | 0đ · 0 · 0 | 0,2273 | Không có ca mới hỏng, không vượt trần vận hành; chi phí 4.456đ vẫn vượt trần 1.500đ đã ký |
 | 6 | R-base-after-20261118-185548-5a27af | base · after | Thu hẹp pilot: cắt kho DN, còn HN, HCM, CT | 1,0 [1,0; 1,0] | 1,0 | 0đ · 0 · 0 | 0,1765 | Độ phủ còn 77,27%, ROI tăng lên 1,27; chi phí 4.400đ vẫn vượt trần 1.500đ đã ký |
@@ -220,7 +220,7 @@ Trạng thái: **Xong** (có bằng chứng) · **Chưa** · **Không áp dụng
 | 6 | Chi phí | Khối "kinh doanh và vận hành" của report: chi phí mỗi ticket so với làm tay, ROI, tiền LLM ticket đắt nhất; `config/operating_gates.json` mục `business` | Chi phí mỗi ticket không vượt trần 1.500đ đã ký, ROI từ 1,0, tiền LLM mỗi ticket không quá 1.500đ | Chưa | `R-base-after-20261118-185548-5a27af`: chi phí 4.400đ vượt trần; ROI 1,27 và tiền LLM cao nhất 770đ đạt | Trần Thái Hưng |
 | 7 | Vận hành | Runbook (Phiếu B mục B7.5–B7.6) + `config/operating_gates.json` mục `operations` (PIC, người duyệt, số người trực, điều kiện dừng, kênh báo tin) + metric trong `monitors.py` | Có PIC, người duyệt, kênh báo tin, điều kiện dừng, runbook khớp config | Xong | `config/operating_gates.json` mục `operations`; Phiếu B mục B7.5, B7.6; `lab10/monitors.py` | Lê Thanh Tùng |
 | 8 | Con người, pháp lý | Bên thứ ba (hãng, tài xế, shop, người nhận quà, người đứng tên duyệt); `config/operating_gates.json` mục `legal`; thẻ S6, S7, S8 có mục riêng ở Phiếu C mục C3 | Không gửi dữ liệu cá nhân cho hãng; chỉ ghi lỗi hãng khi tracking có nguyên nhân | Xong | `config/operating_gates.json` mục `legal`; `R-base-after-20261118-185548-5a27af`: lộ dữ liệu 0, lỗi oan 0 | Trần Thị Hạnh |
-| 9 | Quyết định | Câu tiêu chí (Phiếu A mục A4) + hash Bản tiêu chí đã ký + quyết định Gate 1 (Phiếu B mục B8, Phiếu C mục C12) | Tiêu chí đã ký còn nguyên và có quyết định Gate 1 khớp bằng chứng | Chưa | Hash tiêu chí `f4853f3d` còn nguyên; Phiếu B mục B8 chọn Thu hẹp, còn chờ chốt vòng 1 và số đo mốc `prepared` | Trần Thái Hưng |
+| 9 | Quyết định | Câu tiêu chí (Phiếu A mục A4) + hash Bản tiêu chí đã ký + quyết định Gate 1 (Phiếu B mục B8, Phiếu C mục C12) | Tiêu chí đã ký còn nguyên và có quyết định Gate 1 khớp bằng chứng | Xong | Hash tiêu chí `f4853f3d` còn nguyên; Phiếu B mục B8 chọn Thu hẹp theo `R-base-prepared-20261118-191313-5a27af`; quyết định v2 sẽ cập nhật ở Phiếu C mục C12 | Trần Thái Hưng |
 
 Ô "Chưa" có rủi ro cao → chuyển thành một dòng Risk register (Phiếu C mục C10).
 
@@ -397,12 +397,12 @@ bao nhiêu thời gian? (3) Có phần nào của dự án không nên làm ti�
 | | **v1** (phút 105–115, TRƯỚC khi nhận thẻ sự cố) |
 |---|---|
 | Commit ký tiêu chí (message `Sign acceptance criteria`; hash commit, tuỳ chọn) | `dc1485f` |
-| Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | Điền sau khi chốt vòng 1 |
-| Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: `R-base-before-20261118-181246-9b453b` · bộ nền với cổng vòng 1 (prepared): điền sau khi chốt vòng 1; số đo trước khi chốt: `R-base-after-20261118-185548-5a27af` |
+| Hash chốt cổng vòng 1 (8 ký tự lệnh `lab10.checkpoint` in ra, tuỳ chọn) | `ec9e40b5` |
+| Mã lần chạy dùng làm bằng chứng | bộ nền, mốc base: `R-base-before-20261118-181246-9b453b` · bộ nền với cổng vòng 1 (prepared): `R-base-prepared-20261118-191313-5a27af` |
 | Còn dòng "vượt trần" nào trong report? (hàng chờ, chi phí, ROI, trần tiền, pháp lý) | Report không có dòng vượt trần. Ngưỡng đã ký còn chưa đạt: chi phí mỗi ticket 4.400đ so với trần 1.500đ. |
 | Kho hoặc hãng có số xấu nhất: ____. Nếu chỉ nhìn phân khúc này, quyết định có đổi không? *(Đọc khối "theo kho và hãng" ở cuối output `lab10.eval` / `lab10.grade`, hoặc mục `by_segment` trong `report.json`.)* | Kho DN: nếu chạy riêng thì 10.598đ mỗi ticket, cao hơn làm tay 10.000đ, ROI −0,06. Quyết định không đổi và đây là lý do cắt kho DN. |
 | Quyết định (khoanh một) | **Thu hẹp** |
-| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | `R-base-after-20261118-185548-5a27af`: `pass_rate` 1,0, `pass_k` 1,0, tiền hoàn sai 0đ, lỗi oan 0, lộ dữ liệu 0; năm chỉ số bắt buộc đều đạt. |
+| Bằng chứng 1: mã lần chạy + chỉ số bắt buộc nào đạt / chưa | `R-base-prepared-20261118-191313-5a27af`: `pass_rate` 1,0, `pass_k` 1,0, tiền hoàn sai 0đ, lỗi oan 0, lộ dữ liệu 0; năm chỉ số bắt buộc đều đạt. |
 | Bằng chứng 2 | Cùng lần chạy: ROI 1,27 và 0 ca bị ùn đạt ngưỡng; chi phí 4.400đ mỗi ticket chưa đạt trần 1.500đ. |
 | Bằng chứng 3 | So với toàn bộ phạm vi (`R-base-after-20261118-184907-38d77a`), cắt kho DN giảm chi phí từ 4.456đ xuống 4.400đ và tăng ROI từ 1,24 lên 1,27. Không phạm vi kho hoặc tỉ lệ nào đã thử đạt mức 1.500đ. |
 | Khớp dòng nào trong `decision_rule` đã ký? | Dòng **Thu hẹp**: ba chỉ số an toàn đạt, một ngưỡng kinh doanh chưa đạt nên cắt phần chưa đạt và ghi rõ phần bị cắt. |
