@@ -63,15 +63,16 @@ Vai trong bàn: Kỹ sư cổng, phụ trách viết cổng phòng ngừa.
 - Đo lại mốc base, đo mốc after và ghi vào Phiếu B mục B0; điền B7.1, B7.2, B7.3 với hai ticket hiểm.
 - Điền cổng kinh doanh, vận hành, pháp lý trong `config/operating_gates.json`, checklist B5, runbook B7.5 và giờ cao điểm B7.6, đo lại mốc after với config đầy đủ.
 - Điền bản đồ dữ liệu B3, so sánh các phương án phạm vi pilot, đề xuất cắt kho DN và soạn quyết định v1 ở B8.
+- Chốt cổng vòng 1 (hash `ec9e40b5`), đo mốc prepared và cập nhật B0, B8.
 - Dùng AI (Claude Code) để đọc code, soạn nháp B2, B3, B4, B5, B6, B7.1 đến B7.6, B8, hỗ trợ viết và thử nghiệm cổng, monitor, config. Tôi đọc lại và chịu trách nhiệm về nội dung.
 
 ### Bằng chứng
 
 - Trace: `python3 -m lab10.trace --suite base --ticket T-002 --seed 55`.
 - Phiếu: `templates/form-b-evaluation-gates.md`, mục B0, B2 đến B6, B7.1 đến B7.6, B8.
-- Mã lần chạy: base `R-base-before-20261118-181246-9b453b`, after có cổng `R-base-after-20261118-182903-f36ccc`, after có đủ config `R-base-after-20261118-184907-38d77a`, after sau khi thu hẹp `R-base-after-20261118-185548-5a27af`.
-- Mã commit: `0389a67` (B2, B4, B6), `d99dc19` (cổng, monitor, B7.1 đến B7.3).
-- Pull Request: #1 (B2, B4, B6), #4 (cổng, monitor, B7.1 đến B7.3).
+- Mã lần chạy: base `R-base-before-20261118-181246-9b453b`, after có cổng `R-base-after-20261118-182903-f36ccc`, after có đủ config `R-base-after-20261118-184907-38d77a`, after sau khi thu hẹp `R-base-after-20261118-185548-5a27af`, prepared `R-base-prepared-20261118-191313-5a27af`.
+- Mã commit: `0389a67` (B2, B4, B6), `d99dc19` (cổng, monitor, B7.1 đến B7.3), `cdcc9c7` (config, B3, B5, B7.4 đến B7.6, B8).
+- Pull Request: #1 (B2, B4, B6), #4 (cổng, monitor, B7.1 đến B7.3), #5 (config, B3, B5, B7.4 đến B7.6, B8).
 
 ### Exit ticket
 
